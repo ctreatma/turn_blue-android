@@ -1,0 +1,6 @@
+build/apk
+build/classes
+build/incremental
+build/libs
+build/manifests
+build/res
