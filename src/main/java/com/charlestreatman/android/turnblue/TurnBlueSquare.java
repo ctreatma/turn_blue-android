@@ -27,4 +27,12 @@ public class TurnBlueSquare extends Button {
             this.setBackgroundColor(Color.BLUE);
         }
     }
+
+    void turnBlue() {
+        this.setBackgroundColor(Color.BLUE);
+    }
+
+    boolean isBlue() {
+        return this.color == Color.BLUE;
+    }
 }

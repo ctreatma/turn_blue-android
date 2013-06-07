@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -100,16 +99,15 @@ public class TurnBlueBoardView extends LinearLayout {
 
     private void resetBoard() {
         level = 1;
-        for (int i = 0; i < board.size(); ++i) {
-            TurnBlueSquare square = board.get(i);
-            square.setBackgroundColor(Color.BLUE);
+        for (TurnBlueSquare square : board) {
+            square.turnBlue();
         }
         initializeBoard();
     }
 
     private void checkCompleted() {
         for (TurnBlueSquare square : board) {
-            if (square.color != Color.BLUE) {               
+            if (!square.isBlue()) {
                 if (clicks == 0) {
                     resetBoard();
                 }
