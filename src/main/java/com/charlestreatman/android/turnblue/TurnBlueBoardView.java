@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 // TODO:  Handle getting a parcelable that says what the level was, how many clicks, and what the colors were.
 public class TurnBlueBoardView extends LinearLayout {
@@ -58,7 +59,7 @@ public class TurnBlueBoardView extends LinearLayout {
             LinearLayout tableRow = new LinearLayout(context);
             tableRow.setOrientation(HORIZONTAL);
 
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(squareSize, squareSize, 1.0f);
+            LayoutParams lp = new LayoutParams(squareSize, squareSize);
             lp.setMargins(1, 1, 1, 1);
 
             for (int j = 0; j < boardSize; ++j) {
@@ -110,12 +111,14 @@ public class TurnBlueBoardView extends LinearLayout {
         for (TurnBlueSquare square : board) {
             if (!square.isBlue()) {
                 if (clicks == 0) {
+                    Toast.makeText(getContext(), "You lost!", Toast.LENGTH_SHORT).show();
                     resetBoard();
                 }
                 return;
             }
         }
         level++;
+        Toast.makeText(getContext(), "You made it to level " + level + "!", Toast.LENGTH_SHORT).show();
         initializeBoard();
     }
 
