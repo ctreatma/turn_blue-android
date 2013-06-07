@@ -32,11 +32,11 @@ public class TurnBlueBoardView extends LinearLayout {
         }      
     }
 
-    public TurnBlueBoardView(Context context) {
-        this(context, null);
+    public TurnBlueBoardView(Context context, int width) {
+        this(context, null, width);
     }
 
-    public TurnBlueBoardView(Context context, AttributeSet attrs) {
+    public TurnBlueBoardView(Context context, AttributeSet attrs, int width) {
         super(context, attrs);
 
         this.setOrientation(VERTICAL);
@@ -52,12 +52,13 @@ public class TurnBlueBoardView extends LinearLayout {
 
         this.addView(levelDisplay);
 
+        int squareSize = (width - boardSize - 2)/boardSize;
+
         for (int i = 0; i < boardSize; ++i) {
             LinearLayout tableRow = new LinearLayout(context);
             tableRow.setOrientation(HORIZONTAL);
 
-            // TODO: Don't hard-code this value;  find a way to make the board scale to the screen size
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(25, 25, 1.0f);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(squareSize, squareSize, 1.0f);
             lp.setMargins(1, 1, 1, 1);
 
             for (int j = 0; j < boardSize; ++j) {
