@@ -26,8 +26,8 @@ public class TurnBlueBoardView extends LinearLayout {
             this.idx = idx;
         }
         public void onClick(View v) {
-            clicks++;
-            clickDisplay.setText("Clicks: " + clicks);
+            clicks--;
+            clickDisplay.setText("Clicks Remaining: " + clicks);
             updateBoard(idx);
             checkCompleted();
         }      
@@ -93,8 +93,8 @@ public class TurnBlueBoardView extends LinearLayout {
             updateBoard(index);
         }
 
-        clicks = 0; // Reset click counter
-        clickDisplay.setText("Clicks: " + clicks);
+        clicks = level + lossDifferential; // Reset click counter
+        clickDisplay.setText("Clicks Remaining: " + clicks);
         levelDisplay.setText("Level: " + level);
     }
 
@@ -110,7 +110,7 @@ public class TurnBlueBoardView extends LinearLayout {
     private void checkCompleted() {
         for (TurnBlueSquare square : board) {
             if (square.color != Color.BLUE) {               
-                if (clicks > level + lossDifferential) {
+                if (clicks == 0) {
                     resetBoard();
                 }
                 return;
