@@ -7,21 +7,26 @@ import android.view.Gravity;
 import android.view.ViewGroup;
 
 public class TurnBlue extends Activity {
-
+    private Game game;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.main);
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-        TurnBlueBoardView board = new TurnBlueBoardView(this, Math.min(metrics.heightPixels, metrics.widthPixels));
+        //TurnBlueBoardView board = (TurnBlueBoardView) findViewById(R.id.board);
+        //board.initialize(this, Math.min(metrics.widthPixels, metrics.heightPixels));
+    }
 
-        ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-        board.setGravity(Gravity.CENTER);
-        
-        this.addContentView(board,lp);
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
 }
