@@ -4,28 +4,41 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Toast;
 
-/**
- * Created by ctreatma on 6/8/13.
- */
-public class GameAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
-    private int level, boardSize, lossDifferential;
+public class GameAdapter extends BaseAdapter {
     private Game game;
     private Context context;
 
     public GameAdapter(Context context) {
-        level = 1;
-        boardSize = Integer.valueOf(context.getString(R.string.board_size));
-        lossDifferential = Integer.valueOf(context.getString(R.string.loss_differential));
-        createGame();
+        int boardSize = Integer.valueOf(context.getString(R.string.board_size));
+        int lossDifferential = Integer.valueOf(context.getString(R.string.loss_differential));
+        game = new Game(boardSize, lossDifferential);
         this.context = context;
     }
 
     public int getBoardSize() {
-        return boardSize;
+        return game.getBoardSize();
+    }
+
+    public int getLevel() {
+        return game.getLevel();
+    }
+
+    public int getClicksRemaining() {
+        return game.getClicksRemaining();
+    }
+
+    public void click(int i) {
+        game.click(i);
+        if (game.isVictory()) {
+            Toast.makeText(context, game.levelUp(), Toast.LENGTH_SHORT).show();
+        }
+        else if (game.isOver()) {
+            Toast.makeText(context, game.reset(), Toast.LENGTH_SHORT).show();
+        }
+        notifyDataSetChanged();
     }
 
     @Override
@@ -57,26 +70,5 @@ public class GameAdapter extends BaseAdapter implements AdapterView.OnItemClickL
             v.setBackgroundColor(Color.BLUE);
         }
         return v;
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        game.click(i);
-        notifyDataSetChanged();
-        if (game.isVictory()) {
-            level++;
-            Toast.makeText(context, "You made it to level " + level + "!", Toast.LENGTH_SHORT).show();
-            createGame();
-        }
-        else if (game.isOver()) {
-            level = 1;
-            Toast.makeText(context, "You lost!", Toast.LENGTH_SHORT).show();
-            createGame();
-        }
-        notifyDataSetChanged();
-    }
-
-    private void createGame() {
-        this.game = new Game(boardSize, level, lossDifferential);
     }
 }

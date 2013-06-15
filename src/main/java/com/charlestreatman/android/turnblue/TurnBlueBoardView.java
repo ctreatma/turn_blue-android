@@ -2,24 +2,12 @@ package com.charlestreatman.android.turnblue;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
-import android.widget.Toast;
 import android.view.View;
 
-// TODO:  Handle getting a parcelable that says what the level was, how many clicks, and what the colors were.
 public class TurnBlueBoardView extends GridView {
-    public TurnBlueBoardView(Context context) {
-        this(context, null);
-    }
-
     public TurnBlueBoardView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        GameAdapter adapter = new GameAdapter(context);
-        setAdapter(adapter);
-        this.setNumColumns(adapter.getBoardSize());
-        this.setOnItemClickListener(adapter);
     }
 
     @Override
@@ -45,9 +33,8 @@ public class TurnBlueBoardView extends GridView {
     }
 
     private int getSquareSize() {
-        int height = getHeight();
-        int width = getWidth();
-        GameAdapter adapter = (GameAdapter) getAdapter();
-        return (Math.min(height, width) / adapter.getBoardSize()) - 2;
+        int height = getHeight() - 2;
+        int width = getWidth() - 2;
+        return (Math.min(height, width) / getNumColumns()) - 2;
     }
 }

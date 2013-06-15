@@ -6,25 +6,14 @@
     android:layout_height="fill_parent"
     android:gravity="center">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text=""
-            android:id="@+id/level"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_above="@+id/board"
-            android:layout_centerHorizontal="true"/>
-
     <com.charlestreatman.android.turnblue.TurnBlueBoardView
         android:id="@+id/board"
         android:horizontalSpacing="1dp"
         android:verticalSpacing="1dp"
         android:orientation="vertical"
-        android:gravity="center"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="true"
         android:paddingLeft="1dp"
         android:paddingRight="1dp"
         android:paddingTop="1dp"
@@ -36,8 +25,17 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text=""
+            android:id="@+id/level"
+            android:layout_toRightOf="@+id/board"
+            android:layout_alignParentTop="true"
+            />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text=""
             android:id="@+id/clicks"
-            android:layout_gravity="center|bottom"
-            android:layout_below="@+id/board"
-            android:layout_centerHorizontal="true"/>
+            android:layout_toRightOf="@+id/board"
+            android:layout_below="@id/level"/>
 </RelativeLayout>

@@ -3,11 +3,19 @@ package com.charlestreatman.android.turnblue;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
-import android.view.ViewGroup;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.TextView;
 
-public class TurnBlue extends Activity {
-    private Game game;
+public class TurnBlue extends Activity implements AdapterView.OnItemClickListener {
+    private GameAdapter adapter;
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        adapter.click(i);
+        updateReadouts();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,18 +23,21 @@ public class TurnBlue extends Activity {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-        //TurnBlueBoardView board = (TurnBlueBoardView) findViewById(R.id.board);
-        //board.initialize(this, Math.min(metrics.widthPixels, metrics.heightPixels));
+        TurnBlueBoardView board = (TurnBlueBoardView) findViewById(R.id.board);
+        adapter = new GameAdapter(board.getContext());
+        board.setAdapter(adapter);
+        board.setNumColumns(adapter.getBoardSize());
+        board.setOnItemClickListener(this);
+
+        updateReadouts();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
+    private void updateReadouts() {
+        TextView level = (TextView) findViewById(R.id.level);
+        level.setText("Level " + adapter.getLevel());
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+        TextView clicks = (TextView) findViewById(R.id.clicks);
+        clicks.setText("Clicks remaining: " + adapter.getClicksRemaining());
     }
 
 }

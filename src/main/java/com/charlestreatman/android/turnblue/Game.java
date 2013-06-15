@@ -1,8 +1,5 @@
 package com.charlestreatman.android.turnblue;
 
-/**
- * Created by ctreatma on 6/8/13.
- */
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,24 +7,30 @@ public class Game {
     private ArrayList<Square> board;
     private int boardSize, clicksRemaining, level, lossDifferential;
 
-    public Game(int boardSize, int level, int lossDifferential) {
+    public Game(int boardSize, int lossDifferential) {
+        this(boardSize, lossDifferential, 1);
+    }
+    public Game(int boardSize, int lossDifferential, int level) {
         this.boardSize = boardSize;
         this.level = level;
         this.lossDifferential = lossDifferential;
         createBoard();
-        initializeBoard();
+    }
+
+    public int getBoardSize() {
+        return boardSize;
     }
 
     public int getClicksRemaining() {
         return clicksRemaining;
     }
 
-    public List<Square> getBoardState() {
-        return board;
+    public int getLevel() {
+        return level;
     }
 
-    public boolean getSquareState(int i) {
-        return board.get(i).isOn();
+    public List<Square> getBoardState() {
+        return board;
     }
 
     public boolean isOver() {
@@ -61,6 +64,18 @@ public class Game {
         clicksRemaining--;
     }
 
+    public String reset() {
+        level = 1;
+        createBoard();
+        return "You lost!";
+    }
+
+    public String levelUp() {
+        level++;
+        createBoard();
+        return "You made it to level " + level + "!";
+    }
+
     private void createBoard() {
         board = new ArrayList<Square>();
         for (int i = 0; i < boardSize; ++i) {
@@ -68,6 +83,7 @@ public class Game {
                 board.add(new Square());
             }
         }
+        initializeBoard();
     }
 
     private void initializeBoard() {
