@@ -43,12 +43,12 @@ public class GameAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return game.getBoardState().size();
+        return game.getBoard().size();
     }
 
     @Override
     public Object getItem(int i) {
-        return game.getBoardState().get(i);
+        return game.getBoard().get(i);
     }
 
     @Override

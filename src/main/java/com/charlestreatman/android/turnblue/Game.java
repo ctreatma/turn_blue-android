@@ -29,7 +29,7 @@ public class Game {
         return level;
     }
 
-    public List<Square> getBoardState() {
+    public List<Square> getBoard() {
         return board;
     }
 
