@@ -10,6 +10,7 @@ public class Game {
     public Game(int boardSize, int lossDifferential) {
         this(boardSize, lossDifferential, 1);
     }
+
     public Game(int boardSize, int lossDifferential, int level) {
         this.boardSize = boardSize;
         this.level = level;

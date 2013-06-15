@@ -18,17 +18,12 @@
 
     <com.charlestreatman.android.turnblue.TurnBlueBoardView
         android:id="@+id/board"
-        android:horizontalSpacing="1dp"
-        android:verticalSpacing="1dp"
         android:orientation="vertical"
-        android:gravity="center"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:layout_centerInParent="true"
-        android:paddingLeft="1dp"
-        android:paddingRight="1dp"
-        android:paddingTop="1dp"
-        android:paddingBottom="1dp">
+        android:verticalSpacing="1dp"
+        android:horizontalSpacing="1dp">
     </com.charlestreatman.android.turnblue.TurnBlueBoardView>
 
     <TextView

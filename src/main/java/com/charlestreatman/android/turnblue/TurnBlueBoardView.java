@@ -33,8 +33,8 @@ public class TurnBlueBoardView extends GridView {
     }
 
     private int getSquareSize() {
-        int height = getHeight() - 2;
-        int width = getWidth() - 2;
-        return (Math.min(height, width) / getNumColumns()) - 2;
+        int height = getHeight();
+        int width = getWidth();
+        return (Math.min(height, width) / getNumColumns()) - 1;
     }
 }
